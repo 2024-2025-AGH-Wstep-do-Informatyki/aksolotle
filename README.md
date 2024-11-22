@@ -8,7 +8,7 @@ Welcome to the our point-and-click game!
 Look around, solve challenges and add new sea animals to your collection.
 Don't forget to lose yourself in the minigames, too...
 
-## ABOUT THE PROJECT 
+## About the project
 <p align="justify">
 The project is still in progress. It has been brought to life as our class assignment.
 It has been designed to fullfill specific academic objectives and demonstrate our progress in the ongoing class. 
