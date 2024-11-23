@@ -1,8 +1,5 @@
-# Xolotl
+<h1 align="center"> Xolotl <img src="https://raw.githubusercontent.com/kuchowiczp/readme-tests/main/test-swmimng.svg" style="width: 100px; height: 100px;" align="left"/> </h1>
 <p align="center">
-<img src="https://m.media-amazon.com/images/I/41Q5dBKkvKL._AC_UF894,1000_QL80_.jpg" width="80px" height="80px">
-</p>
-
 Welcome to the our point-and-click game!
 
 Look around, solve challenges and add new sea animals to your collection.
@@ -19,6 +16,14 @@ It reflects the collaborative effort and creativity required to meet high expect
 Xolotl is a relaxing game with collections, where players plunge into an exciting underwater realm.
 Go on an adventure through different oceanic regions, hunt, gather fascinating marine creatures, and enhance your very own aquarium. 
 Throughout the gameplay, players can find treasures, accomplish missions, and acquire uncommon species of their choice.
+
+<details><summary><h2>Instalation</h2></summary>
+<p>
+
+## Requirements
+
+To run this game you need to have python and pygame on your computer. If you have python installed, you can
+donwload pygame with this command: `pip install pygame`
 
 ## Playing the game
 You are able to begin your gameplay by typing the following command in the command line:
@@ -41,6 +46,11 @@ python xolotl.py -l [LANG]
 ```
 python xolotl.py -i /path/to/file.png
 ```
+
+</p>
+</details>
+<hr>
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
