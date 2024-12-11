@@ -35,7 +35,7 @@ class Menu:
         for i in range(6):
             row = i // 3
             col = i % 3
-            x = 40 + (col * (button_width + 20))
+            x = 40 + (col * (button_width + 100))
             y = 440 + (row * (button_height + 20))
             level_rects.append(pygame.Rect(x, y, button_width, button_height))
 
@@ -58,8 +58,8 @@ class Menu:
         if self.current_level == 0:
             mouse_pos = pygame.mouse.get_pos()
             self.screen.blit(background_scaled, (0,0))
-            self.screen.blit(logo_scaled, (40,40))
-            self.screen.blit(levels, (40,350))
+            self.screen.blit(logo_scaled, (450,40))
+            self.screen.blit(levels, (40,330))
 
             for i, rect in enumerate(level_rects):
                 if rect.collidepoint(mouse_pos):
