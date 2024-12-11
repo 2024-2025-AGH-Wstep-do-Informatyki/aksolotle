@@ -58,7 +58,7 @@ class Menu:
         if self.current_level == 0:
             mouse_pos = pygame.mouse.get_pos()
             self.screen.blit(background_scaled, (0,0))
-            self.screen.blit(logo_scaled, (520,40))
+            self.screen.blit(logo_scaled, (450,40))
             self.screen.blit(levels, (40,330))
 
             for i, rect in enumerate(level_rects):
