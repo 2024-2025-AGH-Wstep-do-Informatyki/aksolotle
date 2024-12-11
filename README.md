@@ -26,25 +26,9 @@ To run this game you need to have python and pygame on your computer. If you hav
 donwload pygame with this command: `pip install pygame`
 
 ## Playing the game
-You are able to begin your gameplay by typing the following command in the command line:
+You are able to begin your gameplay by typing the following command in the command line in the `src` directory:
 ```
-python xolotl.py
-```
-
-## Launch options
-<!--- TO DO --->
-You can start the game with certain flags that will affect the mechanics.
-### Pick the game mode.
-```
-python xolotl.py -m [easy/medium/hard]
-```
-### Overwrite your system language options
-```
-python xolotl.py -l [LANG]
-```
-### Import your own fish from your own image file
-```
-python xolotl.py -i /path/to/file.png
+python main.py
 ```
 
 </p>
