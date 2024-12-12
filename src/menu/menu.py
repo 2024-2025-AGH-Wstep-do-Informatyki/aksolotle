@@ -8,6 +8,8 @@ logo_scaled = pygame.transform.scale(logo, (logo.get_width() * 2, logo.get_heigh
 
 levels = pygame.image.load("menu/levels.webp").convert_alpha()
 
+exit_button = pygame.image.load("menu/exit.webp").convert_alpha()
+
 level_buttons = []
 level_buttons_bright = []
 level_rects = []
@@ -26,11 +28,13 @@ class Menu:
     # 0 is menu, 1~6 are levels
     current_level: int = 0
 
-    def __init__(self, screen: pygame.Surface, levels):
+    def __init__(self, screen: pygame.Surface, levels):     
         self.levels = levels
         self.screen = screen
         button_width = level_buttons[0].get_width()
         button_height = level_buttons[0].get_height()
+        
+        self.exit_button_rect = pygame.Rect(self.screen.get_width() - exit_button.get_width() - 40, self.screen.get_height() - exit_button.get_height() - 40, exit_button.get_width(), exit_button.get_height())
 
         for i in range(6):
             row = i // 3
@@ -50,6 +54,9 @@ class Menu:
                         if rect.collidepoint(event.pos):
                             print(f"Level {i+1} clicked!")
                             self.current_level = i+1
+                    if self.exit_button_rect.collidepoint(event.pos): 
+                        print("Exiting...")
+                        exit()
         else:
             if self.current_level <= len(self.levels):
                 self.levels[self.current_level-1].inputs()
@@ -66,6 +73,8 @@ class Menu:
                     self.screen.blit(level_buttons_bright[i], rect)
                 else:
                     self.screen.blit(level_buttons[i], rect)
+
+            self.screen.blit(exit_button, self.exit_button_rect)
         else:
             if self.current_level <= len(self.levels):
                 self.levels[self.current_level-1].graphics()
