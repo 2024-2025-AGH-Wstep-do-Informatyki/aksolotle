@@ -144,7 +144,6 @@ class Level1:
                     if self.bottom_click(event):
                         self.current_bg = 6
 
-
             # for events in the kitchen
             elif self.current_bg == 3:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:

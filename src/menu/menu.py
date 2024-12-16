@@ -1,7 +1,7 @@
 import pygame
 
-background = pygame.image.load("menu/background.webp").convert()
-background_scaled = pygame.transform.scale(background, (background.get_width() * 4, background.get_height() * 4))
+background = pygame.image.load("menu/background.png").convert()
+background_scaled = pygame.transform.scale(background, (background.get_width(), background.get_height()))
 
 logo = pygame.image.load("menu/logo_mock.webp").convert_alpha()
 logo_scaled = pygame.transform.scale(logo, (logo.get_width() * 2, logo.get_height() * 2))
