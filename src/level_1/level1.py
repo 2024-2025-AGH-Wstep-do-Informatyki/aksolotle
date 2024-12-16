@@ -24,7 +24,23 @@ dining_scaled = pygame.transform.scale(dining, (800, 600))
 
 backgrounds = [start_scaled, back_scaled, front_scaled, kitchen_scaled, left_scaled, right_scaled, nav_scaled,
                nav_closeup_scaled, dining_scaled]
+# 0 - start
+# 1 - back
+# 2 - front
+# 3 - kitchen
+# 4 - left
+# 5 - right
+# 6 - nav
+# 7 - nav_closeup
+# 8 - dining
+
 screen_rect = pygame.display.set_mode((1280, 720)).get_rect()
+
+# all of the changes in the backgrounds
+nav_closeup_display = pygame.image.load("level_1/nav-closeup-display.png").convert_alpha()
+nav_closeup_display_scaled = pygame.transform.scale(nav_closeup_display, (300, 225))
+
+interactive = {"nav_closeup_display_scaled": 0, }
 
 
 # var current is used to store the current background image
@@ -143,7 +159,11 @@ class Level1:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.bottom_click(event):
                         self.current_bg = 6
-
+                    if self.coor_click(event, 100, 0, 150):
+                        if interactive["nav_closeup_display_scaled"]:
+                            interactive["nav_closeup_display_scaled"] = 0
+                        else:
+                            interactive["nav_closeup_display_scaled"] = 1
             # for events in the kitchen
             elif self.current_bg == 3:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -163,3 +183,5 @@ class Level1:
         self.screen.fill((0, 0, 0))
         self.screen.blit(backgrounds[self.current_bg],
                          (screen_rect.centerx - 400, screen_rect.centery - 300))
+        if self.current_bg == 7 and interactive["nav_closeup_display_scaled"]:
+            self.screen.blit(nav_closeup_display_scaled, (screen_rect.centerx - 50, screen_rect.centery - 160))
