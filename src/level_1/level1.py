@@ -36,12 +36,29 @@ backgrounds = [start_scaled, back_scaled, front_scaled, kitchen_scaled, left_sca
 
 screen_rect = pygame.display.set_mode((1280, 720)).get_rect()
 
-# all of the changes in the backgrounds
+# all the interactive elements are loaded here
 nav_closeup_display = pygame.image.load("level_1/nav-closeup-display.png").convert_alpha()
 nav_closeup_display_scaled = pygame.transform.scale(nav_closeup_display, (300, 225))
+back_back_storage = pygame.image.load("level_1/back-back-storage.png").convert_alpha()
+back_back_storage_scaled = pygame.transform.scale(back_back_storage, (228 * 0.60, 239 * 0.60))
+back_right_storage = pygame.image.load("level_1/back-right-storage.png").convert_alpha()
+back_right_storage_scaled = pygame.transform.scale(back_right_storage, (140 * 0.85, 129 * 0.85))
+nav_cabinet_right = pygame.image.load("level_1/nav-cabinet-right-open.png").convert_alpha()
+nav_cabinet_right_scaled = pygame.transform.scale(nav_cabinet_right, (705 / 4 * 1.05, 1059 / 4 * 1.05))
+kitchen_cabinet_bottom = pygame.image.load("level_1/kitchen-cabinet-bottom-open.png").convert_alpha()
+kitchen_cabinet_bottom_scaled = pygame.transform.scale(kitchen_cabinet_bottom, (733 / 4 * 0.95, 582 / 4 * 0.95))
+dining_closing = pygame.image.load("level_1/dining-closing(4).png").convert_alpha()
+dining_closing_scaled = pygame.transform.scale(dining_closing, (399 / 4, 163 / 4))
 
-interactive = {"nav_closeup_display_scaled": 0, }
+interactive = {"nav_closeup_display_scaled": 0, "back_back_storage_scaled": 0, "back_right_storage_scaled": 0,
+               "nav_cabinet_right": 0, "kitchen_cabinet_bottom": 0, "dining_closing_1": 0, "dining_closing_2": 0,
+               "dining_closing_3": 0, "dining_closing_4": 0}
 
+# all the items/bonuses are loaded here
+
+# section for handling locks
+
+# code input for the locks
 
 # var current is used to store the current background image
 class Level1:
@@ -107,7 +124,7 @@ class Level1:
                     if self.bottom_click(event):
                         self.current_bg = 1
 
-                    if self.coor_click(event, 45, 45, 200):
+                    if self.coor_click(event, 35, 35, 150):
                         self.current_bg = 6
 
             # for events in the back
@@ -115,6 +132,17 @@ class Level1:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.bottom_click(event):
                         self.current_bg = 0
+                    if self.coor_click(event, 200, 220, 80):
+                        if interactive["back_right_storage_scaled"]:
+                            interactive["back_right_storage_scaled"] = 0
+                        else:
+                            interactive["back_right_storage_scaled"] = 1
+
+                    if self.coor_click(event, 180, 100, 40):
+                        if interactive["back_back_storage_scaled"]:
+                            interactive["back_back_storage_scaled"] = 0
+                        else:
+                            interactive["back_back_storage_scaled"] = 1
 
             # for events in the front
             elif self.current_bg == 2:
@@ -151,8 +179,14 @@ class Level1:
                     if self.coor_click(event, 45, 0, 150):
                         self.current_bg = 3
 
-                    if self.coor_click(event, 1, -200, 200):
+                    if self.coor_click(event, 1, -200, 150):
                         self.current_bg = 7
+
+                    if self.coor_click(event, 200, 40, 100):
+                        if interactive["nav_cabinet_right"]:
+                            interactive["nav_cabinet_right"] = 0
+                        else:
+                            interactive["nav_cabinet_right"] = 1
 
             # for events in the navigation closeup
             elif self.current_bg == 7:
@@ -164,6 +198,7 @@ class Level1:
                             interactive["nav_closeup_display_scaled"] = 0
                         else:
                             interactive["nav_closeup_display_scaled"] = 1
+
             # for events in the kitchen
             elif self.current_bg == 3:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -172,11 +207,41 @@ class Level1:
                     if self.right_click(event):
                         self.current_bg = 8
 
+                    if self.coor_click(event, 0, 250, 100):
+                        if interactive["kitchen_cabinet_bottom"]:
+                            interactive["kitchen_cabinet_bottom"] = 0
+                        else:
+                            interactive["kitchen_cabinet_bottom"] = 1
+
             # for events in the dining room
             elif self.current_bg == 8:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.left_click(event):
                         self.current_bg = 3
+
+                    if self.coor_click(event, -160, 0, 40):
+                        if interactive["dining_closing_1"]:
+                            interactive["dining_closing_1"] = 0
+                        else:
+                            interactive["dining_closing_1"] = 1
+
+                    if self.coor_click(event, -30, 0, 40):
+                        if interactive["dining_closing_2"]:
+                            interactive["dining_closing_2"] = 0
+                        else:
+                            interactive["dining_closing_2"] = 1
+
+                    if self.coor_click(event, 200, 0, 40):
+                        if interactive["dining_closing_3"]:
+                            interactive["dining_closing_3"] = 0
+                        else:
+                            interactive["dining_closing_3"] = 1
+
+                    if self.coor_click(event, 330, 0, 40):
+                        if interactive["dining_closing_4"]:
+                            interactive["dining_closing_4"] = 0
+                        else:
+                            interactive["dining_closing_4"] = 1
 
     def graphics(self):
         # after fill add the current background image
@@ -185,3 +250,25 @@ class Level1:
                          (screen_rect.centerx - 400, screen_rect.centery - 300))
         if self.current_bg == 7 and interactive["nav_closeup_display_scaled"]:
             self.screen.blit(nav_closeup_display_scaled, (screen_rect.centerx - 50, screen_rect.centery - 160))
+
+        if self.current_bg == 1 and interactive["back_right_storage_scaled"]:
+            self.screen.blit(back_right_storage_scaled, (screen_rect.centerx + 180, screen_rect.centery + 90))
+
+        if self.current_bg == 1 and interactive["back_back_storage_scaled"]:
+            self.screen.blit(back_back_storage_scaled, (screen_rect.centerx + 140, screen_rect.centery - 20))
+
+        if self.current_bg == 6 and interactive["nav_cabinet_right"]:
+            self.screen.blit(nav_cabinet_right_scaled, (screen_rect.centerx + 100, screen_rect.centery - 100))
+
+        if self.current_bg == 3 and interactive["kitchen_cabinet_bottom"]:
+            self.screen.blit(kitchen_cabinet_bottom_scaled, (screen_rect.centerx - 60, screen_rect.centery + 165))
+
+        if self.current_bg == 8:
+            if not interactive["dining_closing_1"]:
+                self.screen.blit(dining_closing_scaled, (screen_rect.centerx - 230, screen_rect.centery - 30))
+            if not interactive["dining_closing_2"]:
+                self.screen.blit(dining_closing_scaled, (screen_rect.centerx - 110, screen_rect.centery - 30))
+            if not interactive["dining_closing_3"]:
+                self.screen.blit(dining_closing_scaled, (screen_rect.centerx + 175, screen_rect.centery - 30))
+            if not interactive["dining_closing_4"]:
+                self.screen.blit(dining_closing_scaled, (screen_rect.centerx + 300, screen_rect.centery - 30))
